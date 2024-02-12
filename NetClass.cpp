@@ -2,6 +2,9 @@
 #include <conio.h>
 #include <SFML/Network.hpp>
 #include "ConsoleControl.h"
+#include "Chat.h"
+
+#define PORT 3000
 
 void RunClient();
 void RunServer();
@@ -46,12 +49,20 @@ void RunClient() {
 
 	std::cout << "Client" << std::endl;
 
-	
+	std::cout << "Set server IP --> ";
+
+	std::string ip;
+
+	std::getline(std::cin, ip);
+
+	Chat* chat = Chat::Client(PORT, ip);
 }
 
 void RunServer() {
 
 	std::cout << "Server" << std::endl;
+
+	Chat* chat = Chat::Server(PORT);
 
 	
 }
