@@ -119,22 +119,18 @@ void Chat::ListenMessages(sf::TcpSocket* socket)
 
 	while (true)
 	{
-		char data[100] = {};
-
-		std::size_t received;
+		sf::Packet packet;
 
 		std::string message;
 
-		if (socket->receive(data, 100, received) != sf::Socket::Done)
+		if (socket->receive(packet) != sf::Socket::Done)
 		{
 			ShowError("Error receive Message");
 		}
 		else 
 		{
-			for (size_t i = 0; i < received; i++)
-			{
-				message += data[i];
-			}
+			packet >> message;
+
 			ShowMessage(message);
 
 			_isServerMutex.lock();
@@ -183,20 +179,15 @@ void Chat::ListenKeyboardToSendMessages()
 void Chat::SendMessage(std::string message)
 {
 
-	char data[100] = {};
+	sf::Packet packet;
 
-	int stringSize = message.length();
-
-	for (size_t i = 0; i < stringSize; i++)
-	{
-		data[i] = message[i];
-	}
+	packet << message;
 	
 	_socketMutex.lock();
 
 	for (sf::TcpSocket* socket : _sockets )
 	{
-		if (socket->send(data, 100) != sf::Socket::Done)
+		if (socket->send(packet) != sf::Socket::Done)
 		{
 			ShowError("Error Sending Message");
 		}
