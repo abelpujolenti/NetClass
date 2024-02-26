@@ -27,7 +27,7 @@ public:
 private:
 
 	std::map<Packet::PacketKey, OnReceivePacket> _subscriptions;
-	std::mutex _subscroptionsMutex;
+	std::mutex _subscriptionsMutex;
 
 	std::vector<OnSocketDisconnect> _onSocketDisconnectSubscriptions;
 	std::mutex _onSocketDisconnectMutex;

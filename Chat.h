@@ -45,4 +45,3 @@ public:
 	static Chat* Client(unsigned short port, std::string ip);
 
 };
-
