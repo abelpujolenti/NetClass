@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="WindowsHelpers\Button.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="ConsoleControl.cpp" />
     <ClCompile Include="NetClass.cpp" />
@@ -147,8 +148,10 @@
     <ClCompile Include="ConnectionAbstraction\TcpSocket.cpp" />
     <ClCompile Include="ConnectionAbstraction\TcpListener.cpp" />
     <ClCompile Include="ConnectionAbstraction\SocketSelector.cpp" />
+    <ClCompile Include="WindowsHelpers\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WindowsHelpers\Button.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="ConsoleControl.h" />
     <ClInclude Include="ConnectionAbstraction\SocketsManager.h" />
@@ -156,6 +159,11 @@
     <ClInclude Include="ConnectionAbstraction\TcpSocket.h" />
     <ClInclude Include="ConnectionAbstraction\TcpListener.h" />
     <ClInclude Include="ConnectionAbstraction\SocketSelector.h" />
+    <ClInclude Include="WindowsHelpers\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Pieces\GoldQueen.png" />
+    <Image Include="Pieces\Piezas.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

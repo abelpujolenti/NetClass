@@ -39,6 +39,12 @@
     <ClCompile Include="ConnectionAbstraction\SocketSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WindowsHelpers\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsHelpers\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleControl.h">
@@ -62,5 +68,19 @@
     <ClInclude Include="ConnectionAbstraction\SocketSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WindowsHelpers\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsHelpers\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Pieces\GoldQueen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Pieces\Piezas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
