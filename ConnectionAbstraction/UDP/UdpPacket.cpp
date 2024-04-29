@@ -1,5 +1,8 @@
 #include "UdpPacket.h"
 
+#include <iostream>
+#include <cstring>
+
 UdpPacket UdpPacket::NormalPacket(PacketKey key, ICodable& codable)
 {
 	UdpPacket newPacket;
@@ -45,6 +48,25 @@ void UdpPacket::Decode(sf::Packet& packet)
 {
 	size_t size;
 	packet >> size;
-	//TODO LEER CORRECTAMENTE Y QUITAR DEL BUFFER DE MEMORIA
-	append(getData(), size);
+
+	void* newData = malloc(size);
+
+	if (newData == nullptr)
+	{
+		return;
+	}
+
+	const void* fullData = packet.getData();
+	const char* fullDataChar = static_cast<const char*>(fullData);
+
+	std::memcpy(newData, fullDataChar + packet.getReadPosition(), size);
+	for (size_t i = 0; i < size; ++i)
+	{
+		bool unit;
+		packet >> unit;
+	}
+
+	append(newData, size);
+
+	free(newData);
 }

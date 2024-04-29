@@ -23,7 +23,7 @@ public:
 	static UdpPacket CriticalResponsePacket(PacketKey key, CriticalPacketId criticalPacketId, ICodable& codable);
 	static UdpPacket AcumulatedPacket(CodablePointerVector<UdpPacket> packetsList);
 
-	// Inherited via ICodable
+
 	void Code(sf::Packet& packet) override;
 	void Decode(sf::Packet& packet) override;
 };

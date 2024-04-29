@@ -24,9 +24,12 @@ inline sf::Packet& operator >> (sf::Packet& packet, ICodable& codable)
     return packet;
 }
 
-template <typename T, typename = std::enable_if_t<std::is_base_of<ICodable, T>::value>>
+//template <typename T, typename = std::enable_if_t<std::is_base_of<ICodable, T>::value>>
+template <class T>
 class CodablePointerVector : public std::vector<std::shared_ptr<T>>, public ICodable
 {
+    static_assert(std::is_base_of<ICodable, T>::value, "T must inherit from ICodable");
+
     virtual void Code(sf::Packet& packet) override
     {
         const sf::Uint64 count{ this->size() };
@@ -50,9 +53,12 @@ class CodablePointerVector : public std::vector<std::shared_ptr<T>>, public ICod
     }
 };
 
-template <typename T, typename = std::enable_if_t<std::is_base_of<ICodable, T>::value>>
+//template <class T, typename = std::enable_if_t<std::is_base_of<ICodable, T>::value>>
+template <class T>
 class CodablePointerList : public std::list<std::shared_ptr<T>>, public ICodable
 {
+    static_assert(std::is_base_of<ICodable, T>::value, "T must inherit from ICodable");
+
     virtual void Code(sf::Packet& packet) override
     {
         const sf::Uint64 count{ this->size() };
