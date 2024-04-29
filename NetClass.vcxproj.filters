@@ -57,6 +57,9 @@
     <ClCompile Include="ConnectionAbstraction\UDP\UdpPacket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectionAbstraction\UDP\UdpSendPacketDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleControl.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConnectionAbstraction\UDP\UdpPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionAbstraction\UDP\UdpSendPacketDelegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -129,13 +129,35 @@ void RunClient() {
 
 	std::cout << "Client" << std::endl;
 
+	std::cout << "Set server IP --> " << std::endl;
 
+	std::string ip;
+
+	std::getline(std::cin, ip);
+
+	std::shared_ptr<UdpSocket> clientSocket{ std::make_shared<UdpSocket>(PORT + 1, [](std::shared_ptr<UdpConnection> connection) {
+
+			std::cout << "New Connection " << connection->GetAddress().ToString() << std::endl;
+		})
+	};
+
+	std::cout << "Client On: " << clientSocket->GetAddress().ToString() << std::endl;
+	clientSocket->ConnectTo(UdpAddress(ip, PORT));
+	
 }
 
 void RunServer() {
 
 	std::cout << "Server" << std::endl;
 
+
+	std::shared_ptr<UdpSocket> serverSocket{ std::make_shared<UdpSocket>(PORT, [](std::shared_ptr<UdpConnection> connection) {
+
+			std::cout << "New Connection " << connection->GetAddress().ToString() << std::endl;
+		})
+	};
+
+	std::cout << "Server On: " << serverSocket->GetAddress().ToString() << std::endl;
 	
 }
 

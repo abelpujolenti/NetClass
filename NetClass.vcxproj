@@ -143,6 +143,7 @@
     <ClCompile Include="ConnectionAbstraction\UDP\UdpConnection.cpp" />
     <ClCompile Include="ConnectionAbstraction\UDP\UdpAddress.cpp" />
     <ClCompile Include="ConnectionAbstraction\UDP\UdpPacket.cpp" />
+    <ClCompile Include="ConnectionAbstraction\UDP\UdpSendPacketDelegate.cpp" />
     <ClCompile Include="WindowsHelpers\Button.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="ConsoleControl.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="ConnectionAbstraction\UDP\UdpConnection.h" />
     <ClInclude Include="ConnectionAbstraction\UDP\UdpAddress.h" />
     <ClInclude Include="ConnectionAbstraction\UDP\UdpPacket.h" />
+    <ClInclude Include="ConnectionAbstraction\UDP\UdpSendPacketDelegate.h" />
     <ClInclude Include="WindowsHelpers\Button.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="ConsoleControl.h" />

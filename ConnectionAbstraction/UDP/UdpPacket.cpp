@@ -33,7 +33,7 @@ UdpPacket UdpPacket::CriticalResponsePacket(PacketKey key, CriticalPacketId crit
 UdpPacket UdpPacket::AcumulatedPacket(CodablePointerVector<UdpPacket> packetsList)
 {
 	UdpPacket newPacket;
-	newPacket << PacketType::ACUMULATED << packetsList;
+	newPacket << PacketType::ACCUMULATED << packetsList;
 	return newPacket;
 }
 

@@ -15,7 +15,7 @@ public:
 		NORMAL = 0,
 		CRITICAL = 1,
 		CRITICAL_RESPONSE = 2,
-		ACUMULATED = 3
+		ACCUMULATED = 3
 	};
 
 	static UdpPacket NormalPacket(PacketKey key, ICodable& codable);
