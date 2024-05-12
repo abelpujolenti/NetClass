@@ -10,7 +10,7 @@ public:
 	typedef sf::Uint64 CriticalPacketId;
 
 public:
-	enum PacketType : sf::Uint8 //Comment putot ;)
+	enum PacketType : sf::Uint8 
 	{
 		NORMAL = 0,
 		CRITICAL = 1,
@@ -19,9 +19,9 @@ public:
 	};
 
 	static UdpPacket NormalPacket(PacketKey key, ICodable& codable);
-	static UdpPacket CriticalPacket(PacketKey key, ICodable& codable);
+	static UdpPacket CriticalPacket(PacketKey key, ICodable& codable, CriticalPacketId& outId);
 	static UdpPacket CriticalResponsePacket(PacketKey key, CriticalPacketId criticalPacketId, ICodable& codable);
-	static UdpPacket AcumulatedPacket(CodablePointerVector<UdpPacket> packetsList);
+	static UdpPacket AccumulatedPacket(CodablePointerVector<UdpPacket> packetsList);
 
 
 	void Code(sf::Packet& packet) override;

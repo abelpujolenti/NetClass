@@ -10,7 +10,7 @@ UdpPacket UdpPacket::NormalPacket(PacketKey key, ICodable& codable)
 	return newPacket;
 }
 
-UdpPacket UdpPacket::CriticalPacket(PacketKey key, ICodable& codable)
+UdpPacket UdpPacket::CriticalPacket(PacketKey key, ICodable& codable, CriticalPacketId& outId)
 {
 	UdpPacket newPacket;
 	static CriticalPacketId newId = 0;
@@ -19,6 +19,7 @@ UdpPacket UdpPacket::CriticalPacket(PacketKey key, ICodable& codable)
 	{
 
 	}
+	outId = newId;
 	newId++;
 	return newPacket;
 }
@@ -30,7 +31,7 @@ UdpPacket UdpPacket::CriticalResponsePacket(PacketKey key, CriticalPacketId crit
 	return newPacket;
 }
 
-UdpPacket UdpPacket::AcumulatedPacket(CodablePointerVector<UdpPacket> packetsList)
+UdpPacket UdpPacket::AccumulatedPacket(CodablePointerVector<UdpPacket> packetsList)
 {
 	UdpPacket newPacket;
 	newPacket << PacketType::ACCUMULATED << packetsList;
@@ -39,7 +40,7 @@ UdpPacket UdpPacket::AcumulatedPacket(CodablePointerVector<UdpPacket> packetsLis
 
 void UdpPacket::Code(sf::Packet& packet)
 {
-	size_t size = getDataSize();
+	const size_t size = getDataSize();
 	packet << size;
 	packet.append(getData(), size);
 }

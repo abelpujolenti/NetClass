@@ -1,8 +1,9 @@
 #pragma once
 
 #include "UdpConnection.h"
+#include "../../IPassValues.h"
 
-class UdpSocket : sf::UdpSocket, public UdpSendPacketDelegate
+class UdpSocket : sf::UdpSocket, public UdpSendPacketDelegate, std::enable_shared_from_this<UdpSocket>/*, public IPassValues*/
 {
 public:
 
@@ -10,8 +11,8 @@ public:
 
 public:
 
+	UdpSocket() = default;
 	UdpSocket(UdpAddress::PortNumber port, OnConnectionEnter onConnectionEnter);
-	~UdpSocket();
 
 	void ConnectTo(UdpAddress address);
 
@@ -20,6 +21,8 @@ public:
 
 private:
 
+	const UdpPacket::PacketKey CONNECTION_KEY = 0;
+	
 	bool _isRunning;
 	
 	std::unique_ptr<std::thread> _loopThread;
@@ -30,7 +33,10 @@ private:
 
 	UdpAddress _address;
 
-	std::map<std::string, std::shared_ptr<UdpConnection>> _connectionsMap;	
+	std::map<std::string, std::shared_ptr<UdpConnection>> _connectionsMap;
+
+	std::mutex _pendantConnectionsMapMutex;
+	std::map<std::string, std::shared_ptr<UdpConnection>> _pendantConnectionsMap;
 
 	void ReceiveLoop();
 	void ManageReceivePacketDone(UdpPacket packet, UdpAddress address);
@@ -47,4 +53,6 @@ private:
 	void SendAccumulating(UdpAddress address, UdpPacket packet) override;
 	void SendImmediately(UdpAddress address, UdpPacket packet) override;
 
+	/*void* GetValues() const override;
+	void SetValues(void* data) override;*/
 };

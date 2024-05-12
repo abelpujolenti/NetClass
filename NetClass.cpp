@@ -22,7 +22,7 @@ class SimpleCodable : public ICodable
 
 public:
 
-	std::string text = "";
+	std::string text;
 
 	SimpleCodable() = default;
 	SimpleCodable(std::string text) : text(text)
@@ -63,13 +63,13 @@ int main() {
 	udpPackets.emplace_back(p1);
 	udpPackets.emplace_back(p2);
 
-	UdpPacket packetAcumulated { UdpPacket::AcumulatedPacket(udpPackets) };
+	UdpPacket packetAccumulated { UdpPacket::AccumulatedPacket(udpPackets) };
 
 	sf::Uint8 type;
-	packetAcumulated >> type;
+	packetAccumulated >> type;
 
 	CodablePointerVector<UdpPacket> udpPacketsRead;
-	packetAcumulated >> udpPacketsRead;
+	packetAccumulated >> udpPacketsRead;
 
 	std::vector<SimpleCodable> codablesReaded;
 

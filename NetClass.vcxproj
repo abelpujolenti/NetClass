@@ -144,6 +144,9 @@
     <ClCompile Include="ConnectionAbstraction\UDP\UdpAddress.cpp" />
     <ClCompile Include="ConnectionAbstraction\UDP\UdpPacket.cpp" />
     <ClCompile Include="ConnectionAbstraction\UDP\UdpSendPacketDelegate.cpp" />
+    <ClCompile Include="Gaming\Animation.cpp" />
+    <ClCompile Include="Gaming\LinkCharacter.cpp" />
+    <ClCompile Include="Gaming\Timer.cpp" />
     <ClCompile Include="WindowsHelpers\Button.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="ConsoleControl.cpp" />
@@ -162,6 +165,11 @@
     <ClInclude Include="ConnectionAbstraction\UDP\UdpAddress.h" />
     <ClInclude Include="ConnectionAbstraction\UDP\UdpPacket.h" />
     <ClInclude Include="ConnectionAbstraction\UDP\UdpSendPacketDelegate.h" />
+    <ClInclude Include="CreateSharedPointer.h" />
+    <ClInclude Include="Gaming\Animation.h" />
+    <ClInclude Include="Gaming\LinkCharacter.h" />
+    <ClInclude Include="Gaming\Timer.h" />
+    <ClInclude Include="IPassValues.h" />
     <ClInclude Include="WindowsHelpers\Button.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="ConsoleControl.h" />
@@ -175,6 +183,12 @@
   <ItemGroup>
     <Image Include="Pieces\GoldQueen.png" />
     <Image Include="Pieces\Piezas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gaming\Resources\Arena.png" />
+    <Content Include="Gaming\Resources\ArenaSliced.png" />
+    <Content Include="Gaming\Resources\Bombs.png" />
+    <Content Include="Gaming\Resources\Link.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

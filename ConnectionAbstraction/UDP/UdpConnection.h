@@ -3,6 +3,7 @@
 #include <functional>
 #include <mutex>
 #include <map>
+#include <utility>
 
 #include "UdpSendPacketDelegate.h"
 
@@ -14,19 +15,33 @@ public:
 	typedef std::function<std::shared_ptr<ICodable>(UdpPacket)> OnReceiveCriticalPacket;
 	typedef std::function<void(UdpPacket)> OnReceiveCriticalResponsePacket;
 
+private:
+
+	class UdpCriticalPersistent
+	{
+		public:
+			UdpPacket packet;
+			OnReceiveCriticalResponsePacket onReceiveCriticalResponsePacket;
+			UdpCriticalPersistent() = default;
+			UdpCriticalPersistent(UdpPacket packet, OnReceiveCriticalResponsePacket onReceiveCriticalResponsePacket) :
+				packet(std::move(packet)), onReceiveCriticalResponsePacket(std::move(onReceiveCriticalResponsePacket))
+			{}
+	};
+
+
 public:
 
 	UdpConnection(std::shared_ptr<UdpSendPacketDelegate> delegate, UdpAddress address);
 
-	UdpAddress GetAddress();
+	UdpAddress GetAddress() const;
 
-	void Send(UdpPacket::PacketKey key, ICodable& codable);
+	void Send(UdpPacket::PacketKey key, ICodable& codable) const;
 	void Subscribe(UdpPacket::PacketKey key, OnReceivePacket onReceivePacket);
-	void SubscribeAsync(UdpPacket::PacketKey key, OnReceivePacket onReceivePacket);
+	void SubscribeAsync(UdpPacket::PacketKey key, const OnReceivePacket& onReceivePacket);
 
-	/*void SendCritical(UdpPacket::PacketKey key, ICodable& codable, OnReceiveCriticalResponsePacket onReceiveCriticalResponsePacket);
-	void SubscribeCritical(UdpPacket::PacketKey key, OnReceiveCriticalPacket onReceiveCriticalPacket);
-	void SubscribeCriticalAsync(UdpPacket::PacketKey key, OnReceiveCriticalPacket onReceiveCriticalPacket);*/
+	void SendCritical(UdpPacket::PacketKey key, ICodable& codable, OnReceiveCriticalResponsePacket onReceiveCriticalResponsePacket);
+	void SubscribeOnCritical(UdpPacket::PacketKey key, OnReceiveCriticalPacket onReceiveCriticalPacket);
+	void SubscribeOnCriticalAsync(UdpPacket::PacketKey key, OnReceiveCriticalPacket onReceiveCriticalPacket);
 
 	void ManageReceivedPacket(UdpPacket packet);
 
@@ -39,9 +54,14 @@ private:
 
 	UdpAddress _address;
 	
-	std::map<UdpPacket::PacketKey, OnReceivePacket> _subscriptions;
-	
+	std::map<UdpPacket::PacketKey, OnReceivePacket> _subscriptions;	
 	std::mutex _subscriptionsMutex;
+	
+	std::map<UdpPacket::PacketKey, OnReceiveCriticalPacket> _criticalSubscriptions;	
+	std::mutex _criticalSubscriptionsMutex;
+	
+	std::map<UdpPacket::CriticalPacketId, UdpCriticalPersistent> _criticalResponsesSubscriptions;	
+	std::mutex _criticalResponsesSubscriptionsMutex;
 
 	void ManageNormal(UdpPacket packet);
 	void ManageCritical(UdpPacket packet);
